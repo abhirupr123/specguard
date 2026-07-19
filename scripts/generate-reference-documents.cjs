@@ -4,7 +4,7 @@ const XLSX = require("xlsx");
 const { PDFDocument, StandardFonts, rgb } = require("pdf-lib");
 const { Document, Packer, Paragraph, TextRun, HeadingLevel, Table, TableRow, TableCell, WidthType } = require("docx");
 
-const out = path.resolve(__dirname, "../public/demo-pack");
+const out = path.resolve(__dirname, "../public/reference-documents");
 fs.mkdirSync(out, { recursive:true });
 
 async function pdf(name, title, sections) {
@@ -54,6 +54,6 @@ async function main(){
     {heading:"Pre-release gate",lines:["All capacity, voltage and redundancy deviations must be resolved before electrical energisation.","Vendor submittals must reference an approved technical specification.","Factory acceptance test certificates must be reviewed before integrated systems testing."]},
     {heading:"Evidence requirement",lines:["Each open finding must preserve the approved requirement and submitted evidence with a source-page reference."]}
   ]);
-  console.log(`Created Orion DC-01 demo pack in ${out}`);
+  console.log(`Created Orion DC-01 reference documents in ${out}`);
 }
 main().catch(error=>{console.error(error);process.exit(1)});

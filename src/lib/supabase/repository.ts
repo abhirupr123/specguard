@@ -22,7 +22,7 @@ export async function persistDocument(projectId:string, file:File, parsed:Parsed
 
 export async function loadProjectChunks(projectId:string) {
   const supabase = getSupabaseServer();
-  const { data, error } = await supabase.from("document_chunks").select("page_number,content,documents!inner(title,project_id)").eq("documents.project_id",projectId).limit(12);
+  const { data, error } = await supabase.from("document_chunks").select("page_number,content,documents!inner(title,project_id)").eq("documents.project_id",projectId).limit(200);
   if(error) throw error;
   return (data ?? []).map((row: { page_number:number; content:string; documents:unknown })=>{
     const relation = row.documents as { title?:string } | { title?:string }[] | null;

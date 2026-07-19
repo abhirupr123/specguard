@@ -4,7 +4,7 @@
 
 SpecGuard helps EPC teams identify specification deviations before equipment reaches site or delays commissioning. It compares approved client requirements with vendor submittals, preserves the original evidence, prioritises risk, and presents a clear readiness status for every critical asset.
 
-The prototype ships with a complete synthetic project named **Orion DC-01**, covering UPS systems, CRAH/cooling equipment, and diesel generators.
+The application includes a reference project named **Orion DC-01**, covering UPS systems, CRAH/cooling equipment, and diesel generators.
 
 ## ⚠️ The problem
 
@@ -29,9 +29,9 @@ SpecGuard turns that manual review workflow into an evidence-backed decision pro
 - **💬 Project Copilot:** uses Gemini for cited questions over stored document chunks, with a safe deterministic fallback if the model is unavailable.
 - **🔒 Persistent project data:** Supabase stores projects, private source documents, extracted chunks, assets, findings, and actions.
 
-## 🎯 Demo scenario
+## 🎯 Reference scenario
 
-The main demo asset is `UPS-01`:
+The primary reference asset is `UPS-01`:
 
 | Approved requirement | Vendor submission | Result |
 | --- | --- | --- |
