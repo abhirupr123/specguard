@@ -28,8 +28,21 @@ function validHistory(value:unknown):ChatHistoryItem[] {
     .map(item=>({ role:item.role, content:item.content.slice(0,2000) })).slice(-MAX_HISTORY_ITEMS);
 }
 
-function excerpt(text:string) { return normalizeText(text).slice(0,240); }
-function toCitation(chunk:EvidenceChunk):CopilotCitation { return { source:normalizeText(chunk.source), page:chunk.page, excerpt:excerpt(chunk.text) }; }
+function excerpt(text:string) {
+  const normalized = normalizeText(text); if (normalized.length <= 280) return normalized;
+  const shortened = normalized.slice(0,280); return `${shortened.slice(0,shortened.lastIndexOf(" "))}…`;
+}
+function sourceDescription(source:string) {
+  const normalized = normalizeText(source).toLowerCase();
+  if (normalized.includes("primegen")) return "Vendor offer for the emergency diesel generator package";
+  if (normalized.includes("voltedge")) return "Vendor technical submittal for the UPS package";
+  if (normalized.includes("aerocool")) return "Vendor technical submittal for the CRAH cooling package";
+  if (normalized.includes("client technical")) return "Approved client performance and protection requirements";
+  if (normalized.includes("equipment schedule")) return "Approved equipment, capacity, and delivery baseline";
+  if (normalized.includes("commissioning")) return "Pre-commissioning inspection and release checklist";
+  return "Uploaded project document";
+}
+function toCitation(chunk:EvidenceChunk):CopilotCitation { const source=normalizeText(chunk.source); return { source, description:sourceDescription(source), page:chunk.page, excerpt:excerpt(chunk.text) }; }
 
 function fallbackAnswer(question:string, evidence:EvidenceChunk[]):CopilotResponse {
   const isUps = /ups|blocked|critical|capacity|voltage|redundancy/i.test(question);

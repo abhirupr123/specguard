@@ -10,7 +10,7 @@ export type EvidenceChunk = {
   origin:"uploaded" | "persisted" | "seeded";
 };
 
-export type CopilotCitation = { source:string; page:number; excerpt:string };
+export type CopilotCitation = { source:string; description:string; page:number; excerpt:string };
 export type CopilotMode = "gemini" | "fallback" | "insufficient";
 
 export type CopilotResponse = {
